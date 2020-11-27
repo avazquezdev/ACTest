@@ -12,11 +12,12 @@ import org.robovm.apple.uikit.UIFont;
 import org.robovm.apple.uikit.UILabel;
 import org.robovm.apple.uikit.UIView;
 import org.robovm.apple.uikit.UIViewController;
+import org.robovm.pods.appcenter.crashes.MSACCrashes;
+
+import java.util.Date;
 
 public class MyViewController extends UIViewController {
     private final UIButton button;
-    private final UILabel label;
-    private int clickCount;
 
     public MyViewController() {
         // Get the view of this view controller.
@@ -25,19 +26,20 @@ public class MyViewController extends UIViewController {
         // Setup background.
         view.setBackgroundColor(UIColor.white());
 
-        // Setup label.
-        label = new UILabel(new CGRect(20, 250, 280, 44));
-        label.setFont(UIFont.getSystemFont(24));
-        label.setTextAlignment(NSTextAlignment.Center);
-        view.addSubview(label);
-
         // Setup button.
         button = new UIButton(UIButtonType.RoundedRect);
-        button.setFrame(new CGRect(110, 150, 100, 40));
-        button.setTitle("Click me!", UIControlState.Normal);
+        button.setFrame(new CGRect(20, 150, 400, 40));
+        button.setTitle("Send a sample crash", UIControlState.Normal);
         button.getTitleLabel().setFont(UIFont.getBoldSystemFont(22));
 
-        button.addOnTouchUpInsideListener((control, event) -> label.setText("Click Nr. " + (++clickCount)));
+        button.addOnTouchUpInsideListener(new UIControl.OnTouchUpInsideListener() {
+            @Override
+            public void onTouchUpInside(UIControl uiControl, UIEvent uiEvent) {
+                //MSACCrashes.generateTestCrash();
+                throw new RuntimeException("Test Crash AppCenter " + new Date());
+            }
+        });
+
         view.addSubview(button);
     }
 }

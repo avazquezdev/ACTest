@@ -9,6 +9,14 @@
             <directory>resources</directory>
         </resource>
     </resources>
-    <!-- Remove comment to automatically skip compilation and linking in IDEA -->
-    <!-- <smartSkipRebuild>true</smartSkipRebuild> -->
+    <frameworkPaths>
+        <path>libs</path>
+    </frameworkPaths>
+    <frameworks>
+        <framework>AppCenter</framework>
+        <framework>AppCenterCrashes</framework>
+        <framework>AppCenterAnalytics</framework>
+        <framework>SystemConfiguration</framework>
+        <framework>CoreTelephony</framework>
+    </frameworks>
 </config>
